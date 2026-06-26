@@ -116,7 +116,7 @@ pub struct System {
     pub populated_pcie_slots: i64,
     pub power_cap_enabled_state: Option<String>, // We see this field explicitly returned as null by Dell XE9680s
     pub system_generation: String,
-    pub temp_rollup_status: String,
+    pub temp_rollup_status: Option<String>, // Observed as null if machine is off
     #[serde(rename = "UUID")]
     pub uuid: String,
     pub volt_rollup_status: String,
