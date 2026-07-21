@@ -57,6 +57,7 @@ mod nvidia_dpu;
 mod nvidia_gbswitch;
 mod nvidia_gbx00;
 mod nvidia_gh200;
+mod nvidia_vera_rubin;
 mod nvidia_viking;
 mod supermicro;
 pub use network::{Endpoint, RedfishClientPool, RedfishClientPoolBuilder, REDFISH_ENDPOINT};
