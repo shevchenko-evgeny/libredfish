@@ -22,6 +22,7 @@
 use std::{collections::HashMap, fmt, future::Future, path::Path, pin::Pin, time::Duration};
 
 pub mod model;
+mod smc_gb_nvl;
 use model::account_service::ManagerAccount;
 pub use model::boot::{
     BootOverride, BootSourceOverrideEnabled, BootSourceOverrideMode, BootSourceOverrideTarget,
