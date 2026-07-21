@@ -65,7 +65,7 @@ pub enum RedfishVendor {
     Dell,
     NvidiaDpu,
     Supermicro,
-    SupermicroGBNVL,
+    // SupermicroGBNVL,
     AMI, // Viking DGX H100
     Hpe,
     NvidiaGH200, // grace-hopper 200
