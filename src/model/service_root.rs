@@ -65,7 +65,7 @@ pub enum RedfishVendor {
     Dell,
     NvidiaDpu,
     Supermicro,
-    // SupermicroGBNVL,
+    SupermicroGBNVL,
     AMI, // Viking DGX H100
     Hpe,
     NvidiaGH200, // grace-hopper 200
@@ -116,8 +116,8 @@ impl ServiceRoot {
             },
             "wiwynn" => RedfishVendor::NvidiaGBx00,
             "supermicro" => match self.product.as_deref() {
-                Some("GB NVL") => RedfishVendor::VeraRubin,
-                // Some("GB NVL") => RedfishVendor::SupermicroGBNVL,
+                // Some("GB NVL") => RedfishVendor::NvidiaGBx00,
+                Some("GB NVL") => RedfishVendor::SupermicroGBNVL,
                 _ => RedfishVendor::Supermicro,
             },
             "lite-on technology corp." => RedfishVendor::LiteOnPowerShelf,

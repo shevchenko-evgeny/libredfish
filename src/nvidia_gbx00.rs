@@ -1387,7 +1387,7 @@ impl Bmc {
         Ok(diffs)
     }
 
-    async fn get_expected_and_actual_first_boot_option(
+    pub(crate) async fn get_expected_and_actual_first_boot_option(
         &self,
         boot_interface_mac: &str,
     ) -> Result<(Option<String>, Option<String>), RedfishError> {

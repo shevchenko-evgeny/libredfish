@@ -1333,6 +1333,9 @@ impl RedfishStandard {
             RedfishVendor::DeltaPowerShelf => {
                 Ok(Box::new(crate::delta_powershelf::Bmc::new(self.clone())?))
             }
+            RedfishVendor::SupermicroGBNVL => {
+                Ok(Box::new(crate::smc_gb_nvl::Bmc::new(self.clone())?))
+            }
             _ => Ok(Box::new(self.clone())),
         }
     }
