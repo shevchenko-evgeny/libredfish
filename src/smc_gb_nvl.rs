@@ -321,9 +321,33 @@ impl Redfish for Bmc {
 
     fn is_bios_setup<'a>(
         &'a self,
-        boot_interface: Option<crate::BootInterfaceRef<'a>>,
+        _boot_interface: Option<crate::BootInterfaceRef<'a>>,
     ) -> crate::RedfishFuture<'a, Result<bool, RedfishError>> {
-        Box::pin(async move { Ok(self.machine_setup_status(boot_interface).await?.is_done) })
+        Box::pin(async move { 
+            // Check BIOS and BMC attributes
+            let mut diffs = Vec::new();
+            let sb = self.get_secure_boot().await?;
+            if sb.secure_boot_enable.unwrap_or(false) {
+                diffs.push(MachineSetupDiff {
+                    key: "SecureBoot".to_string(),
+                    expected: "false".to_string(),
+                    actual: "true".to_string(),
+                });
+            }
+            if let Some(obj) = self.s.bios_attributes().await?.as_object() {
+                for (k, v) in obj {
+                    if k.contains("Pcie6DisableOptionROM") && v.as_bool() != Some(false) {
+                        diffs.push(crate::MachineSetupDiff {
+                            key: k.clone(),
+                            expected: "false".into(),
+                            actual: v.to_string(),
+                        });
+                    }
+                }
+            }
+
+            Ok(diffs.is_empty()) 
+        })
     }
 
     fn set_machine_password_policy<'a>(
