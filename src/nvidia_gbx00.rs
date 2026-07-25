@@ -1543,6 +1543,8 @@ impl Bmc {
         if is_gb300 {
             // This platform exposes the TPM through the AMI BIOS name.
             bios_attrs.push(("SecurityDeviceSupport".into(), "Enabled".into()));
+            bios_attrs.push(("SR_IOVSupport".into(), "Enabled".into()));
+            
         } else {
             // Enable TPM.
             bios_attrs.push(("TPM".into(), "Enabled".into()));
